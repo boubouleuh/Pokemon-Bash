@@ -5,16 +5,14 @@
 declare -g pv
 pv=100
 pvenemy=100
-
 clear
-while [[ pv -gt 0 ]] && [[ pvenemy -gt 0 ]]
-do
+read -r -p "Choisissez votre pokemon : " choice
+
 
 #liste des pokemons
 
 function Florrizarre()
 {
-
 if [[ $1 = "me" ]]
 then
     cat << "EOF"
@@ -136,28 +134,6 @@ EOF
 fi
 }
 
-###############################
-
-read -r -p "Choisissez votre pokemon : " choice
-
-if [[ $choice = 1 ]]
-then
-    pvmax=100
-    pv=100
-    atk1=("charge" 40)
-    name="Florrizarre"
-    pokemon=$(Florrizarre me)                                 #pokemon de nous
-elif [[ $choice = 2 ]]
-then
-    pvmax=100
-    pv=100
-    atk1=("charge" 40)
-    name="Dracaufeu"
-    pokemon=$(Dracaufeu me)
-fi
-$pokemon
-clear
-
 ################################
 
 pokemonlist=( Florrizarre Dracaufeu )
@@ -178,6 +154,26 @@ then
     atk1enemy=("charge" 40)
 fi
 
+################################
+
+while [[ pv -gt 0 ]] && [[ pvenemy -gt 0 ]]
+do
+
+if [[ $choice = 1 ]]
+then
+    pvmax=100
+    pv=100
+    atk1=("charge" 40)
+    name="Florrizarre"
+    pokemon=$(Florrizarre me)                                 #pokemon de nous
+elif [[ $choice = 2 ]]
+then
+    pvmax=100
+    pv=100
+    atk1=("charge" 40)
+    name="Dracaufeu"
+    pokemon=$(Dracaufeu me)
+fi
 
 ################################
 
@@ -189,6 +185,13 @@ echo "$pokemon"
 echo
 echo "              $name"
 echo "              $pv/$pvmax"
+echo
 echo "====================================================================================="
-
+echo "1 : ${atk1[0]} -> ${atk1[1]}"
+echo "====================================================================================="
+read -r -p "Choisis ton attaque : " atkvar
+if [[ $atkvar = 1 ]]
+then
+    pvenemy=$(($pvenemy - ${atk1[1]}))
+fi
 done
