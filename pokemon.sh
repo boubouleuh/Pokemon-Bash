@@ -5,7 +5,7 @@ pvenemy=100
 clear
 read -r -p "Choisissez votre pokemon : " choice
 
-
+#test gpg key commit
 #liste des pokemons
 
 function Florrizarre()
