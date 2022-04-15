@@ -1,7 +1,4 @@
 #!/bin/bash
-
-#Pierre is here !
-
 declare -g pv
 pv=100
 pvenemy=100
