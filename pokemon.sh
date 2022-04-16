@@ -11,6 +11,8 @@ intropokemon=0
 #########################################################################################################
 read -r -p "Passer l'into ? : " intro
 
+
+#case permet de vérifier plusieur réponse possible (là toute les formulation de oui ou non) et de faire ensuite un truc en fonction.
 case "$intro" in
         oui | Oui | OUI | o | O | yes | Yes | YES | y | Y );;
         non | Non | NON | n | N | no | NO | No | n | N ) intropokemon=1 ;;
@@ -124,11 +126,14 @@ function frameintro2 ()
 EOF
 }
 
+#On annime en boucle en fesant farme1 puis frame 2. C'est tout con
 frameintro1
 sleep 1.5
 frameintro2
 sleep 1.5
 
+#le -t permet de rendre le read actif quuuuuue 0.25s ce qui permet de passer à la suite directe. Trop bien
+#et le -N c'est pour eviter d'attendre enter après avoir écrit "Q". Ca valide directe.
 read -t 0.25 -N 1 input
     if [[ $input = "q" ]] || [[ $input = "Q" ]]; then
         echo
