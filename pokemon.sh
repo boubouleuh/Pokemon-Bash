@@ -5,7 +5,29 @@ pvenemy=100
 turn=0
 clear
 
+read -r -p "Passer l'into ? : " intro
+
+case "$intro" in
+        oui | Oui | OUI | o | O | yes | Yes | YES | y | Y );;
+        non | Non | NON | n | N | no | NO | No | n | N ) 
+        intro=1 ;;
+        *) 
+        echo "Error syntax !"
+        exit ;;
+esac 
+
+while [ $intro = 1 ]
+do
+done
+
+
+
+
+
+
+
 read -r -p "Choisissez votre pokemon : " choice
+
 
 
 #liste des pokemons
