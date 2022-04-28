@@ -4,16 +4,37 @@ pv=100
 pvenemy=100
 turn=0
 clear
-
 read -r -p "Choisissez votre pokemon : " choice
 
+function print_centered {
+     [[ $# == 0 ]] && return 1
 
+     declare -i TERM_COLS="$(tput cols)"
+     declare -i str_len="${#1}"
+     [[ $str_len -ge $TERM_COLS ]] && {
+          echo "$1";
+          return 0;
+     }
+
+     declare -i filler_len="$(( (TERM_COLS - str_len) / 2 ))"
+     [[ $# -ge 2 ]] && ch="${2:0:1}" || ch=" "
+     filler=""
+     for (( i = 0; i < filler_len; i++ )); do
+          filler="${filler}${ch}"
+     done
+
+     printf "%s%s%s" "$filler" "$1" "$filler"
+     [[ $(( (TERM_COLS - str_len) % 2 )) -ne 0 ]] && printf "%s" "${ch}"
+     printf "\n"
+
+     return 0
+}
 #liste des pokemons
 
 function Florrizarre()
 {
-if [[ $1 = "me" ]]
-then
+    if [ "$1" = "me" ]
+    then
     cat << "EOF"
                                                             
                                                             
@@ -76,9 +97,9 @@ fi
 
 function Dracaufeu()
 {
-if [[ $1 = "me" ]]
-then
-    cat << "EOF"
+    if [[ $1 = "me" ]]
+    then
+        cat << "EOF"
                                                   
                                                             
                  ./                       //*               
@@ -148,7 +169,6 @@ then
     name="Dracaufeu"
     pokemon=$(Dracaufeu me)
 fi
-
 ################################
 
 pokemonlist=( Florrizarre Dracaufeu )
@@ -212,4 +232,87 @@ else
 fi
 
 
+done
+tput civis -- invisible
+if [[ $pv -lt 0 ]];
+then
+    dm=("P" "Pl" "Pla" "Play" "Playe" "Player" "Player d" "Player de" "Player dea" "Player dead")
+    clear
+
+    for x in "${dm[@]}"
+    do
+        lines=$(tput lines)
+        tput cup 0
+            print_centered "      ___      " "-"
+            print_centered "|====/|||\====|" "-"
+            print_centered "|====\|||/====|" "-"
+            print_centered "      ‾‾‾      " "-"
+        tput cup $((lines/2))
+            print_centered "$x" " "
+        tput cup $(($lines-5))    
+            print_centered "      ___      " "-"
+            print_centered "|====/|||\====|" "-"
+            print_centered "|====\|||/====|" "-"
+            print_centered "      ‾‾‾      " "-"
+            sleep 1
+
+    done
+    clear
+    while :
+    do
+            lines=$(tput lines)
+            tput cup 0
+                echo -e "\e[3$(( $RANDOM * 6 / 32767 + 1 ))m"
+                print_centered "      ___      " "-"
+                print_centered "|====/|||\====|" "-"
+                print_centered "|====\|||/====|" "-"
+                print_centered "      ‾‾‾      " "-"
+                tput cup $((lines/2))
+                print_centered "Player dead" " "
+                print_centered "You bad" " "
+            tput cup $(($lines-5))   
+                print_centered "      ___      " "-"
+                print_centered "|====/|||\====|" "-"
+                print_centered "|====\|||/====|" "-"
+                print_centered "      ‾‾‾      " "-"
+    done
+else
+    dm=("E" "En" "Ene" "Enem" "Enemy" "Enemy d" "Enemy de" "Enemy dea" "Enemy dead")
+    clear
+
+    for x in "${dm[@]}"
+    do
+        lines=$(tput lines)
+        tput cup 0
+            print_centered "      ___      " "-"
+            print_centered "|====/|||\====|" "-"
+            print_centered "|====\|||/====|" "-"
+            print_centered "      ‾‾‾      " "-"
+        tput cup $((lines/2))
+            print_centered "$x" " "
+        tput cup $(($lines-5))    
+            print_centered "      ___      " "-"
+            print_centered "|====/|||\====|" "-"
+            print_centered "|====\|||/====|" "-"
+            print_centered "      ‾‾‾      " "-"
+            sleep 1
+    done
+fi
+clear
+while :
+do
+        lines=$(tput lines)
+        tput cup 0
+            echo -e "\e[3$(( $RANDOM * 6 / 32767 + 1 ))m"
+            print_centered "      ___      " "-"
+            print_centered "|====/|||\====|" "-"
+            print_centered "|====\|||/====|" "-"
+            print_centered "      ‾‾‾      " "-"
+            tput cup $((lines/2))
+            print_centered "Enemy dead" " "
+        tput cup $(($lines-5))   
+            print_centered "      ___      " "-"
+            print_centered "|====/|||\====|" "-"
+            print_centered "|====\|||/====|" "-"
+            print_centered "      ‾‾‾      " "-"
 done
